@@ -1,4 +1,5 @@
 <img align="center" src="https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/263/HBTN-hbnb-Final.png"  width="100%"/>
+
 # AirBnB clone - The console
 
 This is the first step towards building a first full web application: the AirBnB clone.
