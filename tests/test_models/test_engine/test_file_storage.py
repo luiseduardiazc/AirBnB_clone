@@ -101,8 +101,8 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(FileStorage._FileStorage__objects, {})
 
     def test__objects_storage(self):
-        FileStorage._FileStorage__objects = True
-        self.assertTrue(FileStorage._FileStorage__objects)
+        storage = FileStorage()
+        self.assertTrue(isinstance(storage._FileStorage__objects, dict))
 
     def test_all(self):
         storage = FileStorage()
