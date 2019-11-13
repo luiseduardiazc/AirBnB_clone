@@ -94,13 +94,14 @@ class TestFileStorage(unittest.TestCase):
         if os.path.exists(self.path_file):
             os.remove(self.path_file)
 
-    def test___file_path_exists(self):
+    def test___file_path(self):
         self.assertEqual(FileStorage._FileStorage__file_path, self.path_file)
 
-    def test__objects_exists(self):
-        self.assertEqual(FileStorage._FileStorage__objects, {})
+    def test__file_path_exists(self):
+        storage = FileStorage()
+        self.assertTrue(isinstance(storage._FileStorage__file_path, str))
 
-    def test__objects_storage(self):
+    def test__objects_exists(self):
         storage = FileStorage()
         self.assertTrue(isinstance(storage._FileStorage__objects, dict))
 
