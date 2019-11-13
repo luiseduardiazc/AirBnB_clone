@@ -235,3 +235,275 @@ class TestHBNBCommand(unittest.TestCase):
             HBNBCommand().onecmd("show User {}".format(base.id))
             output = std_out.getvalue()
             self.assertEqual(output.strip(), str(base))
+
+    def test_help_show(self):
+        """Test the help command"""
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help show")
+        output = f.getvalue().strip()
+        expected1 = "Prints the string representation of an instance."
+        expected2 = "        Use: show [CLASS] [ID]"
+        expected3 = "        Ex: show BaseModel 1234-1234-1234."
+        self.assertIn(expected1, output)
+        self.assertIn(expected2, output)
+        self.assertIn(expected3, output)
+
+    def test_help_quit(self):
+        """Test the help quit command"""
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help quit")
+        output = f.getvalue().strip()
+        expected1 = "Quit command to exit the program"
+        self.assertIn(expected1, output)
+
+    def test_all(self):
+        """Test the all command"""
+        FileStorage._FileStorage__objects = {}
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("all")
+        output1 = f.getvalue().strip()
+        self.assertEqual("[]", output1)
+        base = user.User()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("all User")
+        output3 = f.getvalue().strip()
+        self.assertIn("[User]", output3)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("all Not Class")
+        output3 = f.getvalue().strip()
+        self.assertIn("** class doesn't exist **", output3)
+
+    def test_all_string(self):
+        """Test the all command"""
+        storage.__objects = {}
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("all")
+        output1 = f.getvalue().strip()
+
+        self.assertEqual("[]", output1)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.all()")
+            HBNBCommand().onecmd("create User")
+        output2 = f.getvalue().strip()
+
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.all()")
+        output3 = f.getvalue().strip()
+        self.assertIn("'created_at': datetime.datetime(", output3)
+        self.assertIn("'updated_at': datetime.datetime(", output3)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.all()")
+        output3 = f.getvalue().strip()
+        self.assertIn("'created_at': datetime.datetime(", output3)
+        self.assertIn("'updated_at': datetime.datetime(", output3)
+
+    def test_create(self):
+        """Test the create command"""
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("show User " + output1)
+            HBNBCommand().onecmd(my_input)
+        output2 = f.getvalue().strip()
+        self.assertIn(str("[User] (" + output1 + ")"), output2)
+        self.assertIn("'created_at': datetime.datetime(", output2)
+        self.assertIn("'updated_at': datetime.datetime(", output2)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create City")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("show City " + output1)
+            HBNBCommand().onecmd(my_input)
+        output2 = f.getvalue().strip()
+        self.assertIn(str("[City] (" + output1 + ")"), output2)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create State")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("show State " + output1)
+            HBNBCommand().onecmd(my_input)
+        output2 = f.getvalue().strip()
+        self.assertIn(str("[State] (" + output1 + ")"), output2)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create Place")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("show Place " + output1)
+            HBNBCommand().onecmd(my_input)
+        output2 = f.getvalue().strip()
+        self.assertIn(str("[Place] (" + output1 + ")"), output2)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create Amenity")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("show Amenity " + output1)
+            HBNBCommand().onecmd(my_input)
+        output2 = f.getvalue().strip()
+        self.assertIn(str("[Amenity] (" + output1 + ")"), output2)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create Review")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("show Review " + output1)
+            HBNBCommand().onecmd(my_input)
+        output2 = f.getvalue().strip()
+        self.assertIn(str("[Review] (" + output1 + ")"), output2)
+
+    def test_show2(self):
+        """Test the create command"""
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("User.show(" + output1 + ")")
+            HBNBCommand().onecmd(my_input)
+        output2 = f.getvalue().strip()
+        self.assertIn(str("[User] (" + output1 + ")"), output2)
+        self.assertIn("'created_at': datetime.datetime(", output2)
+        self.assertIn("'updated_at': datetime.datetime(", output2)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('create Test')
+        output2 = f.getvalue().strip()
+        self.assertEqual("** class doesn't exist **", output2)
+
+    def test_count(self):
+        """Test the count command"""
+        FileStorage._FileStorage__objects = {}
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('User.count()')
+        output2 = f.getvalue().strip()
+        self.assertEqual('1', output2)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("User.count()")
+        output2 = f.getvalue().strip()
+        self.assertEqual('2', output2)
+
+    def test_show_errors(self):
+        """Test the show command error messages"""
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("show")
+            HBNBCommand().onecmd(my_input)
+        output2 = f.getvalue().strip()
+        self.assertEqual("** class name missing **", output2)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("show User")
+            HBNBCommand().onecmd(my_input)
+        output3 = f.getvalue().strip()
+        self.assertIn("** instance id missing **", output3)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("show User 89698")
+            HBNBCommand().onecmd(my_input)
+        output4 = f.getvalue().strip()
+        self.assertIn("** no instance found **", output4)
+
+    def test_destroy(self):
+        """Test the destroy command"""
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("destroy User " + output1)
+            HBNBCommand().onecmd(my_input)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("show User " + output1)
+            HBNBCommand().onecmd(my_input)
+        output2 = f.getvalue().strip()
+        self.assertIn("** no instance found **", output2)
+
+    def test_destroy2(self):
+        """Test the destroy command"""
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("User.destroy(" + output1 + ")")
+            HBNBCommand().onecmd(my_input)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("show User " + output1)
+            HBNBCommand().onecmd(my_input)
+        output2 = f.getvalue().strip()
+        self.assertIn("** no instance found **", output2)
+
+    def test_destroy_errors(self):
+        """Test the destroy command error messages"""
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("destroy")
+            HBNBCommand().onecmd(my_input)
+        output2 = f.getvalue().strip()
+        self.assertEqual("** class name missing **", output2)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("destroy User")
+            HBNBCommand().onecmd(my_input)
+        output3 = f.getvalue().strip()
+        self.assertIn("** instance id missing **", output3)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("destroy User 89698")
+            HBNBCommand().onecmd(my_input)
+        output4 = f.getvalue().strip()
+        self.assertIn("** no instance found **", output4)
+
+    def test_update(self):
+        """Test the create command"""
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input1 = str("update User " + output1 + 'name "test this name"')
+            HBNBCommand().onecmd(my_input1)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input2 = str("show User " + output1)
+            HBNBCommand().onecmd(my_input2)
+        output2 = f.getvalue().strip()
+        self.assertIn(str("[User] (" + output1 + ")"), output2)
+        self.assertIn("'created_at': datetime.datetime(", output2)
+        self.assertIn("'updated_at': datetime.datetime(", output2)
+
+    def test_update2(self):
+        """Test the create command"""
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input1 = str("User.update(" + output1 + ', "name",'
+                                                       '"test this name")')
+            HBNBCommand().onecmd(my_input1)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input2 = str("show User " + output1)
+            HBNBCommand().onecmd(my_input2)
+        output2 = f.getvalue().strip()
+        self.assertIn(str("[User] (" + output1 + ")"), output2)
+        self.assertIn("'created_at': datetime.datetime(", output2)
+        self.assertIn("'updated_at': datetime.datetime(", output2)
+
+    def test_update_errors(self):
+        """Test the destroy command error messages"""
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User")
+        output1 = f.getvalue().strip()
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("update")
+            HBNBCommand().onecmd(my_input)
+        output2 = f.getvalue().strip()
+        self.assertEqual("** class name missing **", output2)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("update User")
+            HBNBCommand().onecmd(my_input)
+        output3 = f.getvalue().strip()
+        self.assertIn("** instance id missing **", output3)
+        with mock.patch('sys.stdout', new=StringIO()) as f:
+            my_input = str("update User 89698")
+            HBNBCommand().onecmd(my_input)
+        output4 = f.getvalue().strip()
+        self.assertIn("** no instance found **", output4)
