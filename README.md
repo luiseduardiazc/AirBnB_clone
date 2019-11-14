@@ -8,11 +8,11 @@ This is the first step towards building a first full web application: the AirBnB
 
 This console was built for an object managing specific use-case, with functionalities like:
 
-    Create a new object (ex: a new User or a new Place)
-    Retrieve an object from a file, a database etc…
-    Do operations on objects (count, compute stats, etc…)
-    Update attributes of an object
-    Destroy an object
+Create a new object (ex: a new User or a new Place)
+Retrieve an object from a file, a database etc…
+Do operations on objects (count, compute stats, etc…)
+Update attributes of an object
+Destroy an object
 
 ## Functionality
 
