@@ -148,6 +148,7 @@ This is a table with the files and their respective description used to create t
 ## Version
 * 1.0
 (11 | 11 | 2019) First version
+
 ## Authors
 
 Luis Eduardo Díaz <luis.diaz.car@gmail.com>
