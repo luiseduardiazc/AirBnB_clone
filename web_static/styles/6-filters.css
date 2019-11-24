@@ -1,0 +1,112 @@
+/* Filters*/
+
+.filters {
+    background-color: white;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+}
+
+
+/* Search button*/
+
+.filters button {
+    background: #FF5A5F;
+    border: none;
+    border-radius: 4px;
+    color: #FFFFFF;
+    float: right;
+    font-size: 18px;
+    height: 48px;
+    margin: 12px 30px;
+    width: 20%;
+}
+
+
+/*  opacity hover search button*/
+
+.filters button:hover {
+    opacity: 0.9;
+}
+
+
+/* locations and amenities styles */
+
+.locations,
+.amenities {
+    height: 100%;
+    width: 25%;
+    flex: min-content;
+}
+
+
+/* locations styles */
+
+.locations {
+    border-right: solid 1px #DDDDDD;
+}
+
+
+/* filter h3 h4 styles*/
+
+.filters h3,
+.filters h4 {
+    margin: 0;
+    padding-left: 3em;
+}
+
+
+/* filter h3 styles*/
+
+.filters h3 {
+    font-weight: 600;
+    padding-top: 1em;
+}
+
+
+/* filter h4 styles*/
+
+.filters h4 {
+    font-weight: 400;
+}
+
+
+/*popover h2 ul styles */
+
+.popover h2,
+ul {
+    margin: 0;
+    list-style: none;
+}
+
+
+/*popover h2 styles */
+
+.popover h2 {
+    padding-left: 1.5em;
+}
+
+
+/*popover styles */
+
+.popover {
+    background-color: #fafafa;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0px 0px 4px 4px;
+    margin-top: 20px;
+    display: none;
+}
+
+
+/* locations and amenities popover hover */
+
+.filters .locations:hover .popover,
+.filters .amenities:hover .popover {
+    display: block;
+}
