@@ -1,0 +1,31 @@
+/* Filters*/
+
+.filters {
+    background-color: white;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    height: 70px;
+    width: 100%;
+}
+
+
+/* Search button*/
+
+.filters button {
+    background: #FF5A5F;
+    border: none;
+    border-radius: 4px;
+    color: #FFFFFF;
+    float: right;
+    font-size: 18px;
+    height: 48px;
+    margin: 12px 30px;
+    width: 20%;
+}
+
+
+/*  opacity hover search button*/
+
+.filters button:hover {
+    opacity: 0.9;
+}
