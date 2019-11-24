@@ -1,0 +1,74 @@
+/* Filters*/
+
+.filters {
+    background-color: white;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+}
+
+
+/* Search button*/
+
+.filters button {
+    background: #FF5A5F;
+    border: none;
+    border-radius: 4px;
+    color: #FFFFFF;
+    float: right;
+    font-size: 18px;
+    height: 48px;
+    margin: 12px 30px;
+    width: 20%;
+}
+
+
+/*  opacity hover search button*/
+
+.filters button:hover {
+    opacity: 0.9;
+}
+
+
+/* locations and amenities styles */
+
+.locations,
+.amenities {
+    height: 100%;
+    width: 25%;
+}
+
+
+/* locations styles */
+
+.locations {
+    border-right: solid 1px #DDDDDD;
+    padding-left: 4em;
+}
+
+
+/* filter h3 h4 styles*/
+
+.filters h3,
+.filters h4 {
+    margin: 0;
+}
+
+
+/* filter h3 styles*/
+
+.filters h3 {
+    font-weight: 600;
+    padding: 1em 0 0;
+}
+
+
+/* filter h4 styles*/
+
+.filters h4 {
+    font-weight: 400;
+}
